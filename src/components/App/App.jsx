@@ -29,6 +29,7 @@ export default function App() {
   const addContact = (newContact) => {
  
     setContacts([...contacts, newContact, ]);
+    
   };
 
   const deleteContact = (contactId) => {
