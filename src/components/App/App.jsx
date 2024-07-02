@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import ContactForm from "../ContactForm/ContactForm";
 import ContactList from "../ContactList/ContactList";
 import SearchBox from "../SearchBox/SearchBox";
+
 
 const initialValues = [
   { id: "id-1", name: "Rosie Simpson", number: "459-12-56" },
@@ -11,12 +12,23 @@ const initialValues = [
   { id: "id-4", name: "Annie Copeland", number: "227-91-26" },
 ];
 export default function App() {
-  const [contacts, setContacts] = useState(initialValues);
+ 
 
+  const [contacts, setContacts] = useState(() => {
+    // Загрузка контактов из Local Storage при монтировании компонента
+    const savedContacts = localStorage.getItem('contacts');
+    return savedContacts ? JSON.parse(savedContacts) : initialValues;
+  });
+
+  useEffect(() => {
+    // Сохранение контактов в Local Storage при изменении состояния contacts
+    localStorage.setItem('contacts', JSON.stringify(contacts));
+  }, [contacts]);
   const [filter, setFilter] = useState("");
 
   const addContact = (newContact) => {
-    setContacts([...contacts, newContact]);
+ 
+    setContacts([...contacts, newContact, ]);
   };
 
   const deleteContact = (contactId) => {

@@ -18,9 +18,10 @@ export default function ContactForm ({onAdd}) {
       .min(3, "Too Short!")
       .max(50,"Too Long!")
       .required("Required"),
-      number: Yup.string()
-      .min(3, "Too short")
-      .max(50, "Too long").required("Required"),
+      number:Yup.string()
+      .min(3, "Too Short!")
+      .max(50,"Too Long!")
+      .required("Required"),
     });
     const initialValues = {
       id: "",
